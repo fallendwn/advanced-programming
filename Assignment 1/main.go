@@ -3,25 +3,25 @@ package main
 import (
 	"fmt"
 
+	"github.com/DenisLi/Assignment1/Bank"
 	"github.com/DenisLi/Assignment1/Company"
 	"github.com/DenisLi/Assignment1/Library"
 	"github.com/DenisLi/Assignment1/Shapes"
 )
 
 func main() {
+
+	//====================================================================================================
 	//library test
+	//====================================================================================================
+
 	library := new(Library.Library)
-	book := Library.Book{
 
-		ID:         "3",
-		Title:      "no",
-		Author:     "no",
-		IsBorrowed: false,
-	}
-	library.AddBook(book)
+	library.CLI()
 
+	//====================================================================================================
 	//shapes test
-
+	//====================================================================================================
 	circle := &Shapes.Circle{
 
 		Radius: 3,
@@ -51,6 +51,10 @@ func main() {
 		fmt.Printf("Area of %T is %.2f and perimeter is %.2f\n", shape, shape.CalculateArea(), shape.CalculatePerimeter())
 
 	}
+
+	//====================================================================================================
+	//company test
+	//====================================================================================================
 
 	company := new(Company.Company)
 
@@ -83,4 +87,12 @@ func main() {
 	company.AddEmployee(&fullTimeEmployee2)
 	company.AddEmployee(&partTimeEmployee1)
 	company.ListEmployees()
+
+	//====================================================================================================
+	//bank test
+	//====================================================================================================
+
+	bank := Bank.NewBankAccount("Denis", "Li", "4400 4400 1234 5678")
+	bank.CLI()
+
 }
