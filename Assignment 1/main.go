@@ -1,44 +1,86 @@
 package main
 
 import (
+	"fmt"
+
+	"github.com/DenisLi/Assignment1/Company"
 	"github.com/DenisLi/Assignment1/Library"
+	"github.com/DenisLi/Assignment1/Shapes"
 )
 
 func main() {
 	//library test
-	// fmt.Println("salam")
 	library := new(Library.Library)
-	// book1 := Library.Book{
+	book := Library.Book{
 
-	// 	ID:         1,
-	// 	Title:      "Преступление и Наказание",
-	// 	Author:     "Достоевский",
-	// 	IsBorrowed: false,
-	// }
-	// book2 := Library.Book{
+		ID:         "3",
+		Title:      "no",
+		Author:     "no",
+		IsBorrowed: false,
+	}
+	library.AddBook(book)
 
-	// 	ID:         2,
-	// 	Title:      "Идиот",
-	// 	Author:     "Достоевский",
-	// 	IsBorrowed: false,
-	// }
-	// book3 := Library.Book{
+	//shapes test
 
-	// 	ID:         3,
-	// 	Title:      "Братья Карамазовы",
-	// 	Author:     "Достоевский",
-	// 	IsBorrowed: true,
-	// }
-	// library.AddBook(book1)
-	// library.AddBook(book2)
-	// library.AddBook(book3)
-	// library.BorrowBook(book3)
-	// library.BorrowBook(book1)
-	// library.ListAvailableBooks()
-	// library.ReturnBook(book1)
-	// library.ReturnBook(book3)
-	// library.ReturnBook(book2)
-	// library.ListAvailableBooks()
-	// fmt.Println("Welcome to library!\n\nCommands:\n1. Add a book\n2. Borrow a book\n3. Return a book\n4. List all available books")
-	library.CLI()
+	circle := &Shapes.Circle{
+
+		Radius: 3,
+	}
+
+	rectangle := &Shapes.Rectangle{
+
+		Width:  3,
+		Height: 3,
+	}
+
+	square := &Shapes.Square{
+
+		Width: 3,
+	}
+
+	triangle := &Shapes.Triangle{
+
+		FirstSide:  3,
+		SecondSide: 3,
+		ThirdSide:  3,
+	}
+
+	slice := []Shapes.Shape{circle, rectangle, square, triangle}
+
+	for _, shape := range slice {
+		fmt.Printf("Area of %T is %.2f and perimeter is %.2f\n", shape, shape.CalculateArea(), shape.CalculatePerimeter())
+
+	}
+
+	company := new(Company.Company)
+
+	fullTimeEmployee1 := Company.FullTimeEmployee{
+
+		ID:          1,
+		Name:        "Denis",
+		Surname:     "Li",
+		MonthSalary: 320000,
+		Position:    "Someone IDK",
+	}
+	fullTimeEmployee2 := Company.FullTimeEmployee{
+
+		ID:          1,
+		Name:        "Definetely not Denis",
+		Surname:     "Not Li",
+		MonthSalary: 320001,
+		Position:    "Director maybe",
+	}
+	partTimeEmployee1 := Company.PartTimeEmployee{
+
+		ID:           2,
+		Name:         "Aslan",
+		Surname:      "Asylkhanov",
+		MoneyPerHour: 5000,
+		Shifts:       15,
+		Position:     "Office worker",
+	}
+	company.AddEmployee(&fullTimeEmployee1)
+	company.AddEmployee(&fullTimeEmployee2)
+	company.AddEmployee(&partTimeEmployee1)
+	company.ListEmployees()
 }
