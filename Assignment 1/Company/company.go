@@ -4,6 +4,7 @@ import "fmt"
 
 type Employee interface {
 	GetDetails()
+	GetID() uint64
 }
 
 type FullTimeEmployee struct {
@@ -17,6 +18,24 @@ type FullTimeEmployee struct {
 func (fullTimeEmployee *FullTimeEmployee) GetDetails() {
 
 	fmt.Printf("Fulltime employee named : %s %s, Position %s, Salary %.2f\n", fullTimeEmployee.Name, fullTimeEmployee.Surname, fullTimeEmployee.Position, fullTimeEmployee.MonthSalary)
+
+}
+
+func (fullTimeEmployee *FullTimeEmployee) GetID() uint64 {
+
+	return fullTimeEmployee.ID
+
+}
+
+func (c *Company) CreateFullEmployee(name, surname, position string, monthSalary float64) *FullTimeEmployee {
+	c.numberOfEmployees++
+	return &FullTimeEmployee{
+		ID:          c.numberOfEmployees,
+		Name:        name,
+		Surname:     surname,
+		MonthSalary: monthSalary,
+		Position:    position,
+	}
 
 }
 
@@ -35,18 +54,36 @@ func (partTimeEmployee *PartTimeEmployee) GetDetails() {
 
 }
 
+func (partTimeEmployee *PartTimeEmployee) GetID() uint64 {
+
+	return partTimeEmployee.ID
+
+}
+func (c *Company) CreatePartEmployee(name, surname, position string, MoneyPerHour float64, shifts int) *PartTimeEmployee {
+	c.numberOfEmployees++
+	return &PartTimeEmployee{
+		ID:           c.numberOfEmployees,
+		Name:         name,
+		Surname:      surname,
+		MoneyPerHour: MoneyPerHour,
+		Shifts:       shifts,
+		Position:     position,
+	}
+
+}
+
 type Company struct {
-	Employees map[uint64]Employee
+	Employees         map[uint64]Employee
+	numberOfEmployees uint64
 }
 
 //AddEmployee, ListEmployees
 func (company *Company) AddEmployee(employee Employee) {
-	var id uint64
-	switch e := employee.(type) {
-	case *FullTimeEmployee:
-		id = e.ID
-	case *PartTimeEmployee:
-		id = e.ID
+	id := employee.GetID()
+	fmt.Println(id)
+	if employee == nil {
+		fmt.Printf("You send nil user.")
+		return
 	}
 
 	if company.Employees == nil {

@@ -7,8 +7,6 @@ import (
 	"strconv"
 )
 
-var id int = 1
-
 type Book struct {
 	ID         string
 	Title      string
@@ -17,7 +15,8 @@ type Book struct {
 }
 
 type Library struct {
-	Books map[string]Book
+	numberOfBooks int
+	Books         map[string]Book
 }
 
 func (library *Library) AddBook(book Book) {
@@ -80,12 +79,12 @@ func (library *Library) CLI() {
 			scanner.Scan()
 			author := scanner.Text()
 			newBook := Book{
-				ID:         strconv.Itoa(id),
+				ID:         strconv.Itoa(library.numberOfBooks + 1),
 				Title:      title,
 				Author:     author,
 				IsBorrowed: false,
 			}
-			id += 1
+			library.numberOfBooks += 1
 			library.AddBook(newBook)
 		case "2":
 			var bookId string

@@ -16,9 +16,10 @@ func main() {
 	//====================================================================================================
 
 	library := new(Library.Library)
-
+	library1 := new(Library.Library)
 	library.CLI()
-
+	library1.CLI()
+	library.CLI()
 	//====================================================================================================
 	//shapes test
 	//====================================================================================================
@@ -58,34 +59,12 @@ func main() {
 
 	company := new(Company.Company)
 
-	fullTimeEmployee1 := Company.FullTimeEmployee{
-
-		ID:          1,
-		Name:        "Denis",
-		Surname:     "Li",
-		MonthSalary: 320000,
-		Position:    "Someone IDK",
-	}
-	fullTimeEmployee2 := Company.FullTimeEmployee{
-
-		ID:          1,
-		Name:        "Definetely not Denis",
-		Surname:     "Not Li",
-		MonthSalary: 320001,
-		Position:    "Director maybe",
-	}
-	partTimeEmployee1 := Company.PartTimeEmployee{
-
-		ID:           2,
-		Name:         "Aslan",
-		Surname:      "Asylkhanov",
-		MoneyPerHour: 5000,
-		Shifts:       15,
-		Position:     "Office worker",
-	}
-	company.AddEmployee(&fullTimeEmployee1)
-	company.AddEmployee(&fullTimeEmployee2)
-	company.AddEmployee(&partTimeEmployee1)
+	fullTimeEmployee1 := company.CreateFullEmployee("Denis", "Li", "Someone IDK", 3200000)
+	fullTimeEmployee2 := company.CreateFullEmployee("Definetely not Denis", "Not Li", "Director", 3200001)
+	partTimeEmployee1 := company.CreatePartEmployee("Aslan", "Asylkhanov", "Office worker", 5000, 15)
+	company.AddEmployee(fullTimeEmployee1)
+	company.AddEmployee(fullTimeEmployee2)
+	company.AddEmployee(partTimeEmployee1)
 	company.ListEmployees()
 
 	//====================================================================================================
